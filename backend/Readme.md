@@ -6,12 +6,12 @@
 
 В проекте доступны следующие скрипты:
 
-### `yarn start`
+### `yarn dev`
 
 Запускает приложение с помощью `nodemon` и `ts-node`, собирая и запуская файл `src/index.ts`.
 
 ```bash
 `yarn start`
- `yarn dev`
- `yarn stop`
+`yarn dev`
+`yarn stop`
 ```
