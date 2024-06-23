@@ -1,5 +1,4 @@
 import {Schema, model, Document} from 'mongoose';
-import {Categories} from '../types';
 
 interface CategoryType extends Document {
   id: number;
@@ -7,6 +6,7 @@ interface CategoryType extends Document {
   url: string;
   query: string;
   parentId: string;
+  shard: string;
 }
 
 const categoryShema = new Schema<CategoryType>({
@@ -19,6 +19,10 @@ const categoryShema = new Schema<CategoryType>({
     required: true,
   },
   url: {
+    type: String,
+    required: true,
+  },
+  shard: {
     type: String,
     required: true,
   },

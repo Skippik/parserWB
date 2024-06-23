@@ -27,6 +27,29 @@ const App = () => {
     }
   };
   //
+  const updateCategories = async () => {
+    setLoading(true); // Установка флага загрузки
+    try {
+      const response = await axios.get(url('categories-save')); // Выполнение GET запроса
+      console.log(response.data); // Вывод данных в консоль
+    } catch (error) {
+      console.error('Ошибка при получении данных:', error);
+    } finally {
+      setLoading(false); // Снятие флага загрузки независимо от результата запроса
+    }
+  };
+  const saveProducts = async () => {
+    setLoading(true); // Установка флага загрузки
+    try {
+      const response = await axios.get(url('products-save')); // Выполнение GET запроса
+      console.log(response.data); // Вывод данных в консоль
+    } catch (error) {
+      console.error('Ошибка при получении данных:', error);
+    } finally {
+      setLoading(false); // Снятие флага загрузки независимо от результата запроса
+    }
+  };
+  //
   return (
     <Layout>
       <Header style={{display: 'flex', alignItems: 'center'}}>
@@ -45,6 +68,19 @@ const App = () => {
             <Col span={24}>
               <Button loading={loading} type='primary' onClick={getCategories}>
                 {t('Categories')}
+              </Button>
+            </Col>
+            <Col span={24}>
+              <Button
+                loading={loading}
+                type='primary'
+                onClick={updateCategories}>
+                {t('Update Categories')}
+              </Button>
+            </Col>
+            <Col span={24}>
+              <Button loading={loading} type='primary' onClick={saveProducts}>
+                {t('Category products')}
               </Button>
             </Col>
           </Row>
