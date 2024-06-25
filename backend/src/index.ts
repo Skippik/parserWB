@@ -10,7 +10,7 @@ const port = process.env.PORT;
 const mongoUri = process.env.MONGO_URI;
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:4000',
   methods: ['GET', 'POST'], // Разрешённые HTTP методы
   allowedHeaders: ['Content-Type'], // Разрешённые заголовки
 };

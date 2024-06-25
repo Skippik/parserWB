@@ -24,7 +24,7 @@ const categoryShema = new Schema<CategoryType>({
   },
   shard: {
     type: String,
-    required: true,
+    required: false,
   },
   query: {
     type: String,

@@ -1,95 +1,67 @@
-import {Button, Col, Layout, Row, theme} from 'antd';
-import {Content, Footer, Header} from 'antd/es/layout/layout';
-import axios from 'axios';
+import {ConfigProvider} from 'antd';
 import {useTranslation} from 'react-i18next';
-import {url} from './api';
-import {useState} from 'react';
+import './assets/less/index.less';
+import {BrowserRouter} from 'react-router-dom';
+import ru from 'antd/locale/ru_RU';
+import {ErrorBoundaries, MainLayout} from './components';
 
 const App = () => {
   //
   const {t} = useTranslation();
   //
-  const {
-    token: {colorBgContainer, borderRadiusLG},
-  } = theme.useToken();
   //
-  const [loading, setLoading] = useState(false);
-  //
-  const getCategories = async () => {
-    setLoading(true); // Установка флага загрузки
-    try {
-      const response = await axios.get(url('categories')); // Выполнение GET запроса
-      console.log(response.data); // Вывод данных в консоль
-    } catch (error) {
-      console.error('Ошибка при получении данных:', error);
-    } finally {
-      setLoading(false); // Снятие флага загрузки независимо от результата запроса
-    }
-  };
-  //
-  const updateCategories = async () => {
-    setLoading(true); // Установка флага загрузки
-    try {
-      const response = await axios.get(url('categories-save')); // Выполнение GET запроса
-      console.log(response.data); // Вывод данных в консоль
-    } catch (error) {
-      console.error('Ошибка при получении данных:', error);
-    } finally {
-      setLoading(false); // Снятие флага загрузки независимо от результата запроса
-    }
-  };
-  const saveProducts = async () => {
-    setLoading(true); // Установка флага загрузки
-    try {
-      const response = await axios.get(url('products-save')); // Выполнение GET запроса
-      console.log(response.data); // Вывод данных в консоль
-    } catch (error) {
-      console.error('Ошибка при получении данных:', error);
-    } finally {
-      setLoading(false); // Снятие флага загрузки независимо от результата запроса
-    }
-  };
+  // //
+  // const getCategories = async () => {
+  //   setLoading(true); // Установка флага загрузки
+  //   try {
+  //     const response = await axios.get(url('categories')); // Выполнение GET запроса
+  //     console.log(response.data); // Вывод данных в консоль
+  //   } catch (error) {
+  //     console.error('Ошибка при получении данных:', error);
+  //   } finally {
+  //     setLoading(false); // Снятие флага загрузки независимо от результата запроса
+  //   }
+  // };
+  // //
+  // const updateCategories = async () => {
+  //   setLoading(true); // Установка флага загрузки
+  //   try {
+  //     const response = await axios.get(url('categories-save')); // Выполнение GET запроса
+  //     console.log(response.data); // Вывод данных в консоль
+  //   } catch (error) {
+  //     console.error('Ошибка при получении данных:', error);
+  //   } finally {
+  //     setLoading(false); // Снятие флага загрузки независимо от результата запроса
+  //   }
+  // };
+  // const saveProducts = async () => {
+  //   setLoading(true); // Установка флага загрузки
+  //   try {
+  //     const response = await axios.get(url('products-save')); // Выполнение GET запроса
+  //     console.log(response.data); // Вывод данных в консоль
+  //   } catch (error) {
+  //     console.error('Ошибка при получении данных:', error);
+  //   } finally {
+  //     setLoading(false); // Снятие флага загрузки независимо от результата запроса
+  //   }
+  // };
   //
   return (
-    <Layout>
-      <Header style={{display: 'flex', alignItems: 'center'}}>
-        <div className='demo-logo' />
-        <></>
-      </Header>
-      <Content style={{padding: '0 48px'}}>
-        <div
-          style={{
-            background: colorBgContainer,
-            minHeight: 280,
-            padding: 24,
-            borderRadius: borderRadiusLG,
-          }}>
-          <Row gutter={[10, 10]}>
-            <Col span={24}>
-              <Button loading={loading} type='primary' onClick={getCategories}>
-                {t('Categories')}
-              </Button>
-            </Col>
-            <Col span={24}>
-              <Button
-                loading={loading}
-                type='primary'
-                onClick={updateCategories}>
-                {t('Update Categories')}
-              </Button>
-            </Col>
-            <Col span={24}>
-              <Button loading={loading} type='primary' onClick={saveProducts}>
-                {t('Category products')}
-              </Button>
-            </Col>
-          </Row>
-        </div>
-      </Content>
-      <Footer style={{textAlign: 'center'}}>
-        Ant Design ©{new Date().getFullYear()} Created by Ant UED
-      </Footer>
-    </Layout>
+    <BrowserRouter>
+      <ConfigProvider
+        locale={ru}
+        direction={'ltr'}
+        form={{
+          colon: false,
+        }}
+        input={{}}>
+        <ErrorBoundaries
+          btnTitle={t('Go home')}
+          errorTitle={t('Sorry, something went wrong.')}>
+          <MainLayout />
+        </ErrorBoundaries>
+      </ConfigProvider>
+    </BrowserRouter>
   );
 };
 

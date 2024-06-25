@@ -40,8 +40,6 @@ const getProductsCategories = async (): Promise<{
       if (cat.shard && cat.parentId) {
         const url = `https://catalog.wb.ru/catalog/${cat.shard}/v2/catalog?appType=1&cat=${cat.id}&curr=rub&spp=30&dest=-68619`;
 
-        console.log(url);
-
         const resp: AxiosResponse<{
           data: {products: ProductType[]; total: number};
         }> = await axios.get(url);
@@ -65,7 +63,7 @@ const getProductsCategories = async (): Promise<{
     };
   } catch (error) {
     console.error('Error fetching categories:', error);
-    throw new Error('Failed to fetch categories'); // Возможно, стоит вернуть ошибку, чтобы обработать ее в вызывающем коде
+    throw new Error('Failed to fetch categories');
   }
 };
 
@@ -92,7 +90,7 @@ const saveCategoriesBD = async (req: Request, res: Response): Promise<void> => {
       } else {
         const newCategory = new Category({
           ...category,
-          parentId: parentId ? parentId.toString() : null, // Преобразуем parentId в строку, если он есть
+          parentId: parentId ? parentId.toString() : null,
         });
         await newCategory.save();
         savedCount++;
@@ -101,7 +99,7 @@ const saveCategoriesBD = async (req: Request, res: Response): Promise<void> => {
       // Рекурсивно сохраняем подкатегории
       if (category.childs && category.childs.length > 0) {
         for (const subCategory of category.childs) {
-          await saveCategory(subCategory, category.id); // Передаем id текущей категории как parentId
+          await saveCategory(subCategory, category.id);
         }
       }
     };
@@ -136,7 +134,6 @@ const saveProductsBD = async (req: Request, res: Response): Promise<void> => {
         .json({error: 'No products found or invalid data structure'});
     }
 
-    // Сохраняем каждый продукт в базу данных
     const savedProducts = await Promise.all(
       productData.products.map(async (product: ProductType) => {
         try {
@@ -147,7 +144,7 @@ const saveProductsBD = async (req: Request, res: Response): Promise<void> => {
           return savedProduct;
         } catch (error) {
           console.error('Error saving product:', error);
-          throw error; // Пробрасываем ошибку дальше для обработки в блоке catch вне map
+          throw error;
         }
       }),
     );
