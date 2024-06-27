@@ -1,3 +1,4 @@
+import {setCategories} from '@/features/categoriesSlice';
 import {CategoryType} from '@/types';
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 export const url = (endpoint: string) => {
@@ -10,6 +11,16 @@ export const api = createApi({
   endpoints: builder => ({
     getCategories: builder.query<CategoryType[], void>({
       query: () => 'categories',
+      async onQueryStarted(arg, {dispatch, queryFulfilled}) {
+        try {
+          const {data} = await queryFulfilled;
+          console.log(data);
+
+          dispatch(setCategories(data));
+        } catch (e) {
+          console.log(e);
+        }
+      },
     }),
   }),
 });
@@ -17,3 +28,5 @@ export const api = createApi({
 export const {useGetCategoriesQuery} = api;
 
 export default api;
+
+// вынести в отдельный файл запрос категории

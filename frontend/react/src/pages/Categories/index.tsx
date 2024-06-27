@@ -1,13 +1,9 @@
-import {useGetCategoriesQuery} from '@/api';
+import {selectCategories} from '@/features';
+import {useSelector} from 'react-redux';
 
 const Categories = () => {
   //
-  const {
-    data: categories,
-    isError,
-    isFetching,
-    refetch,
-  } = useGetCategoriesQuery();
+  const categories = useSelector(selectCategories);
 
   console.log('categories', categories);
 
