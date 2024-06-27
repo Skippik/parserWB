@@ -1,6 +1,7 @@
 import {useGetCategoriesQuery} from '@/api';
 
-const Home = () => {
+const Categories = () => {
+  //
   const {
     data: categories,
     isError,
@@ -8,9 +9,9 @@ const Home = () => {
     refetch,
   } = useGetCategoriesQuery();
 
-  console.log('home', categories);
+  console.log('categories', categories);
 
-  return <div>{'Home'}</div>;
+  return <div>{'categories'}</div>;
 };
 
-export default Home;
+export default Categories;
