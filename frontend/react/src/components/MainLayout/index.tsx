@@ -7,7 +7,7 @@ import menu from './MenuConfig';
 import {useTranslation} from 'react-i18next';
 import {Link, useLocation} from 'react-router-dom';
 import AppRouter from '@/router';
-import {useGetCategoriesQuery} from '@/api';
+import {useGetCategoriesQuery} from '@/api/categoriesApi';
 
 const MainLayout = () => {
   //

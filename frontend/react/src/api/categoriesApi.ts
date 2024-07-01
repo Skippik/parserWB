@@ -5,8 +5,7 @@ export const url = (endpoint: string) => {
   return import.meta.env.VITE_APP_API_ROUTE + endpoint;
 };
 
-export const api = createApi({
-  reducerPath: 'api',
+export const categoriesApi = createApi({
   baseQuery: fetchBaseQuery({baseUrl: import.meta.env.VITE_APP_API_ROUTE}),
   endpoints: builder => ({
     getCategories: builder.query<CategoryType[], void>({
@@ -23,8 +22,6 @@ export const api = createApi({
   }),
 });
 
-export const {useGetCategoriesQuery} = api;
+export const {useGetCategoriesQuery} = categoriesApi;
 
-export default api;
-
-// вынести в отдельный файл запрос категории
+export default categoriesApi;
