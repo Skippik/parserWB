@@ -48,3 +48,8 @@ export type ProductColor = {
   id: number;
   name: string;
 };
+
+export type SystemInfoType = {
+  categoriesUpdateDate: string;
+  productsUpdateDate: string;
+};

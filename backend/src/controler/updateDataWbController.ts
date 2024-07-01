@@ -3,6 +3,8 @@ import {CategoriesWbType} from '../types';
 import Category, {CategoryType} from '../model/category';
 import {Request, Response} from 'express';
 import Product, {ProductType} from '../model/product';
+import SystemInfo from '../model/systemInfo';
+import {updateTimeCategories} from '../helpers/updateTime';
 
 const getCategoriesWB = async (url: string) => {
   try {
@@ -34,10 +36,10 @@ const getProductsCategories = async (): Promise<{
 
     for (let i = 0; i < 3; i++) {
       const cat = categoriesData[i];
-      if (!cat.parentId) {
+      if (!cat.id) {
         continue;
       }
-      if (cat.shard && cat.parentId) {
+      if (cat.shard && cat.id) {
         const url = `https://catalog.wb.ru/catalog/${cat.shard}/v2/catalog?appType=1&cat=${cat.id}&curr=rub&spp=30&dest=-68619`;
 
         const resp: AxiosResponse<{
@@ -112,6 +114,7 @@ const saveCategoriesBD = async (req: Request, res: Response): Promise<void> => {
         'Categories save': savedCount,
         'Categories update': updateCount,
       });
+      updateTimeCategories();
     } else {
       res.status(404).json({error: 'Category not found'});
     }

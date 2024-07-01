@@ -14,6 +14,10 @@ const Categories = () => {
     const mainCategories: MenuItem[] = [];
 
     categories.forEach(cat => {
+      if (cat.id !== 2337) {
+        console.log(cat);
+      }
+
       if (!cat.parentId) {
         const childrenCategories: MenuItem[] = categories
           .filter(childCat => +childCat.parentId === cat.id)
@@ -25,7 +29,7 @@ const Categories = () => {
 
         mainCategories.push({
           key: cat.id,
-          label: `${cat.name}: ${childrenCategories.length}`,
+          label: `${cat.name}: ${childrenCategories.length} ${cat.id}`,
           icon: <Cat />,
           children: childrenCategories.length ? childrenCategories : undefined,
         });
