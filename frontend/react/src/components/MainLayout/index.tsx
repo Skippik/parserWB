@@ -47,7 +47,7 @@ const MainLayout = () => {
         </Sider>
         <Layout>
           <MainHeader />
-          <Content style={{margin: '0 16px'}}>
+          <Content style={{margin: '16px'}}>
             <div
               style={{
                 padding: 24,

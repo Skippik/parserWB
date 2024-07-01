@@ -3,8 +3,7 @@ import {CategoriesWbType} from '../types';
 import Category, {CategoryType} from '../model/category';
 import {Request, Response} from 'express';
 import Product, {ProductType} from '../model/product';
-import SystemInfo from '../model/systemInfo';
-import {updateTimeCategories} from '../helpers/updateTime';
+import {updateTime} from '../helpers/updateTime';
 
 const getCategoriesWB = async (url: string) => {
   try {
@@ -110,11 +109,11 @@ const saveCategoriesBD = async (req: Request, res: Response): Promise<void> => {
       for (const category of categories) {
         await saveCategory(category);
       }
+      updateTime('categories');
       res.status(200).json({
         'Categories save': savedCount,
         'Categories update': updateCount,
       });
-      updateTimeCategories();
     } else {
       res.status(404).json({error: 'Category not found'});
     }
@@ -154,6 +153,7 @@ const saveProductsBD = async (req: Request, res: Response): Promise<void> => {
 
     // Проверяем, были ли успешно сохранены какие-либо продукты
     if (savedProducts.length > 0) {
+      updateTime('products');
       res.status(200).json(savedProducts); // Возвращаем массив сохраненных продуктов
     } else {
       res.status(404).json({error: 'No products were saved'});
