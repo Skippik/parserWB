@@ -1,10 +1,12 @@
-import rootReducer from '@/api';
-import categoriesApi from '@/api/categoriesApi';
-import systemInfoApi from '@/api/systemInfoApi';
+import categoriesApi, {getCategoriesApi} from '@/api/categoriesApi';
+import systemInfoApi, {getSystemInfoApi} from '@/api/systemInfoApi';
 import {configureStore} from '@reduxjs/toolkit';
 
 const Store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    [getCategoriesApi.reducerPath]: getCategoriesApi.reducer,
+    [getSystemInfoApi.reducerPath]: getSystemInfoApi.reducer,
+  },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(
       categoriesApi.middleware,
@@ -20,3 +22,6 @@ const Store = configureStore({
 export type RootState = ReturnType<typeof Store.getState>;
 
 export default Store;
+
+export {useGetCategoriesQuery} from '../api/categoriesApi';
+export {useGetSystemInfoQuery} from '../api/systemInfoApi';

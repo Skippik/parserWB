@@ -1,6 +1,13 @@
+// src/api/selectors.ts
+
+import getCategoriesApi from '@/api/categoriesApi';
+import getSystemInfoApi from '@/api/systemInfoApi';
 import {RootState} from '@/store';
 
+// Селектор для категорий
 export const selectCategories = (state: RootState) =>
-  state.categories.categories;
+  getCategoriesApi.endpoints.getCategories.select()(state);
 
-// export const selectSystemInfo = (state: RootState) => state.
+// Селектор для системной информации
+export const selectSystemInfo = (state: RootState) =>
+  getSystemInfoApi.endpoints.getSystemInfo.select()(state);

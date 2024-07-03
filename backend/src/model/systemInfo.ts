@@ -1,22 +1,25 @@
 import {Schema, model, Document} from 'mongoose';
 
-interface SystemInfoTypeModel extends Document {
-  categoriesUpdateDate: string;
-  productsUpdateDate: string;
+interface SystemInfoType extends Document {
+  categoriesUpdateDate?: number;
+  productsUpdateDate?: number;
 }
 
-const systemInfoShema = new Schema<SystemInfoTypeModel>({
-  categoriesUpdateDate: {
-    type: String,
-    required: false,
+const systemInfoShema = new Schema<SystemInfoType>(
+  {
+    categoriesUpdateDate: {
+      type: Number,
+      required: false,
+    },
+    productsUpdateDate: {
+      type: Number,
+      required: false,
+    },
   },
-  productsUpdateDate: {
-    type: String,
-    required: true,
-  },
-});
+  {collection: 'systeminfo'},
+);
 
-const SystemInfo = model<SystemInfoTypeModel>('SystemInfo', systemInfoShema);
+const SystemInfo = model<SystemInfoType>('Systeminfo', systemInfoShema);
 
 export default SystemInfo;
-export {SystemInfoTypeModel};
+export {SystemInfoType};

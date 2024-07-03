@@ -2,7 +2,8 @@ import {setSystemInfo} from '@/features/systemInfoSlice';
 import {SystemInfoType} from '@/types';
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-export const systemInfoApi = createApi({
+export const getSystemInfoApi = createApi({
+  reducerPath: 'getSystemInfoApi',
   baseQuery: fetchBaseQuery({baseUrl: import.meta.env.VITE_APP_API_ROUTE}),
   endpoints: builder => ({
     getSystemInfo: builder.query<SystemInfoType, void>({
@@ -19,6 +20,6 @@ export const systemInfoApi = createApi({
   }),
 });
 
-export const {useGetSystemInfoQuery} = systemInfoApi;
+export const {useGetSystemInfoQuery} = getSystemInfoApi;
 
-export default systemInfoApi;
+export default getSystemInfoApi;

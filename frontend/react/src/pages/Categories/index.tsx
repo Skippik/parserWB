@@ -8,18 +8,21 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 const Categories = () => {
   //
-  const categories = useSelector(selectCategories);
+  const {data} = useSelector(selectCategories);
 
   const mainCategories = () => {
     const mainCategories: MenuItem[] = [];
+    if (!data) {
+      return;
+    }
 
-    categories.forEach(cat => {
+    data.forEach(cat => {
       if (cat.id !== 2337) {
         console.log(cat);
       }
 
       if (!cat.parentId) {
-        const childrenCategories: MenuItem[] = categories
+        const childrenCategories: MenuItem[] = data
           .filter(childCat => +childCat.parentId === cat.id)
           .map(childCat => ({
             key: childCat.id,

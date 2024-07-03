@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 
 const Home = () => {
   //
-  const categories = useSelector(selectCategories);
+  const {data} = useSelector(selectCategories);
   //
   const {t} = useTranslation();
 
@@ -17,7 +17,7 @@ const Home = () => {
           title={t('Categories')}
           extra={<Link to='/categories'>{t('Categories')}</Link>}
           style={{width: 300}}>
-          <Tag>{`${t('Categories count')}: ${categories.length}`}</Tag>
+          <Tag>{`${t('Categories count')}: ${data?.length}`}</Tag>
         </Card>
       </Col>
     </Row>
