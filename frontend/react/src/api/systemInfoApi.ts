@@ -1,16 +1,16 @@
-import {setCategories} from '@/features/categoriesSlice';
-import {CategoryType} from '@/types';
+import {setSystemInfo} from '@/features/systemInfoSlice';
+import {SystemInfoType} from '@/types';
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-export const categoriesApi = createApi({
+export const systemInfoApi = createApi({
   baseQuery: fetchBaseQuery({baseUrl: import.meta.env.VITE_APP_API_ROUTE}),
   endpoints: builder => ({
-    getCategories: builder.query<CategoryType[], void>({
-      query: () => 'categories',
+    getSystemInfo: builder.query<SystemInfoType, void>({
+      query: () => 'system-info',
       async onQueryStarted(arg, {dispatch, queryFulfilled}) {
         try {
           const {data} = await queryFulfilled;
-          dispatch(setCategories(data));
+          dispatch(setSystemInfo(data));
         } catch (e) {
           console.log(e);
         }
@@ -19,6 +19,6 @@ export const categoriesApi = createApi({
   }),
 });
 
-export const {useGetCategoriesQuery} = categoriesApi;
+export const {useGetSystemInfoQuery} = systemInfoApi;
 
-export default categoriesApi;
+export default systemInfoApi;

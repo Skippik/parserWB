@@ -1,15 +1,16 @@
-import api from '@/api';
-import categoriesSlice from '@/features/categoriesSlice';
+import rootReducer from '@/api';
+import categoriesApi from '@/api/categoriesApi';
+import systemInfoApi from '@/api/systemInfoApi';
 import {configureStore} from '@reduxjs/toolkit';
 
 const Store = configureStore({
-  reducer: {
-    [api.reducerPath]: api.reducer,
-    categories: categoriesSlice,
-    // someAppSlice: someAppSlice.reducer,
-  },
+  reducer: rootReducer,
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(api.middleware),
+    getDefaultMiddleware().concat(
+      categoriesApi.middleware,
+      systemInfoApi.middleware,
+      // Добавляйте сюда другие middlewares по мере необходимости
+    ),
 });
 
 // Для refetchOnFocus/refetchOnReconnect

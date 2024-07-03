@@ -6,3 +6,8 @@ export type CategoryType = {
   parentId: string;
   shard: string;
 };
+
+export type SystemInfoType = {
+  categoriesUpdateDate: string;
+  productsUpdateDate: string;
+};

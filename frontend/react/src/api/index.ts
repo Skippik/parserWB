@@ -1,6 +1,8 @@
 import {setCategories} from '@/features/categoriesSlice';
 import {CategoryType} from '@/types';
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+
+//
 export const url = (endpoint: string) => {
   return import.meta.env.VITE_APP_API_ROUTE + endpoint;
 };
@@ -26,5 +28,3 @@ export const api = createApi({
 export const {useGetCategoriesQuery} = api;
 
 export default api;
-
-// вынести в отдельный файл запрос категории
