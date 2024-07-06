@@ -36,10 +36,12 @@ interface ProductType extends Document {
   meta: {};
   sizes: ProductSize;
   colors: ProductColor[];
+  category_id: number;
 }
 
 const productSchema = new Schema<ProductType>({
   __sort: {type: Number, required: false},
+  category_id: {type: Number, required: false},
   ksort: {type: Number, required: false},
   time1: {type: Number, required: false},
   time2: {type: Number, required: false},

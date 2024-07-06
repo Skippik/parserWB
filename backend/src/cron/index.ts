@@ -1,8 +1,18 @@
-const cron = require('node-cron');
+import UpdateProductsWbController from '../controler/UpdateProductsWbController';
+import cron from 'node-cron';
 
-cron.schedule('1 * * * *', () => {
-  console.log('Эта задача выполняется каждую минуту');
-});
+export const cronUpdateTask = () => {
+  // Планирование задания каждый день в 3 часа ночи
+  cron.schedule('0 3 * * *', async () => {
+    console.log('Запуск задачи по обновлению продуктов');
+    try {
+      await UpdateProductsWbController.saveProductsDB();
+      console.log('Обновление продуктов завершено успешно');
+    } catch (error) {
+      console.error('Ошибка при обновлении продуктов:', error);
+    }
+  });
 
-// Держим процесс Node.js активным
-setInterval(() => {}, 1000);
+  // Начинаем планирование
+  console.log('Планировщик запущен');
+};

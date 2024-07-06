@@ -4,6 +4,9 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import morgan from 'morgan';
 require('dotenv').config();
+import UpdateProductsWbController from '../src/controler/UpdateProductsWbController';
+import cron from 'node-cron';
+import {cronUpdateTask} from './cron';
 
 const app = express();
 const port = process.env.PORT;
@@ -40,3 +43,5 @@ mongoose
       console.error('Unknown error connecting to MongoDB');
     }
   });
+
+cronUpdateTask();
